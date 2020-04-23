@@ -1,42 +1,36 @@
-/* -------------------- */
-/*   1. 변수 재선언 실습    */
-/* -------------------- */
+/* 변수 재선언 실습 */
 
-var vv = 123;
-var vv = 321;
-console.log("vv : ", vv);
+var v = '선언됨';
+var v = '재선언됨';
+console.log("v : ", v);
 
-let ll = 123;
-let ll = 321;
-console.log("ll : ", ll);
+let l = '선언됨';
+let l = '재선언됨';
+console.log("l : ", l); //재선언 불가_에러
 
-const cc = 123;
-const cc = 321;
-console.log("cc : ", cc);
+const c = '선언됨';
+const c = '재선언됨';
+console.log("c : ", c); //재선언 불가_에러
 
 
 
-/* -------------------- */
-/*   2. 변수 재할당 실습    */
-/* -------------------- */
+/* 2. 변수 재할당 실습 */
 
-// var vv = 'abc';
-// vv = 'def';
+// var vv = '선언됨';
+// vv = '재할당됨';
 // console.log("vv : ", vv);
 
-// let ll = 'abc';
-// ll = 'def';
+// let ll = '선언됨';
+// ll = '재할당됨';
 // console.log("ll : ", ll);
 
-// const cc = 'abc';
-// cc = 'def';
-// console.log("cc : ", cc);
+// const cc = '선언됨';
+// cc = '재할당됨';
+// console.log("cc : ", cc); //재할당 불가_에러
 
 
 
-/* -------------------- */
-/*   3. 변수 초기화 실습    */
-/* -------------------- */
+/* 3. 변수 초기화 실습 */
 
 // var vv;
 // console.log("vv : ", vv);
@@ -45,4 +39,4 @@ console.log("cc : ", cc);
 // console.log("ll : ", ll);
 
 // const cc;
-// console.log("cc : ", cc);
+// console.log("cc : ", cc); //초기화 필요_에러

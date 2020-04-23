@@ -1,17 +1,13 @@
-/* -------------------- */
-/*   1. 함수 선언식 실습    */
-/* -------------------- */
+/*   1. 함수 선언식 실습 - 호이스팅 영향 O    */
 
-function addNum(x, y) {
-    console.log(x + y);
+function mulNum(x, y) {
+    console.log(x * y);
 }
 
-addNum(2, 3);
+mulNum(2, 3);
 
 
-/* -------------------- */
-/*   2. 함수 표현식 실습    */
-/* -------------------- */
+/*   2. 함수 표현식 실습 - 호이스팅 영항 X    */
 
 var addStr = function (x, y) {
     console.log(x + y);
