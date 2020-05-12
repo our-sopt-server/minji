@@ -99,6 +99,7 @@ router.post('/signin', async (req, res) => {
     return;
   }
   // 성공 - login success와 함께 user Id 반환
+  //send뒤의 결과가 리턴됨.
   res.status(statusCode.OK).send(util.success(statusCode.OK, resMessage.LOGIN_SUCCESS, {
     userId: id
   }));
@@ -114,7 +115,17 @@ router.post('/signin', async (req, res) => {
 */
 router.get('/profile/:id', async (req, res) => {
   // request params 에서 데이터 가져오기
+  const id = req.params.id;
   // 존재하는 아이디인지 확인 - 없다면 No user 반환
+  const user = UserModel.filter(user => user.id == id);
+  if (user.length == 0) {
+    res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, resMessage.NO_USER))
+    return;
+  }
   // 성공 - login success와 함께 user Id 반환
+  res.status(statusCode.OK).send(util.success(statusCode.OK, resMessage.LOGIN_SUCCESS, {
+    user: user
+  }));
 });
+
 module.exports = router;
