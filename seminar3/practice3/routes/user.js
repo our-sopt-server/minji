@@ -51,20 +51,30 @@ router.post('/signup', async (req, res) => {
     return;
   }
   //already ID
-  if (UserModel.filter(user => user.id == id).length > 0) {
-    res.status(statusCode.BAD_REQUEST)
-      .send(util.fail(statusCode.BAD_REQUEST, resMessage.ALREADY_ID));
-    return;
-  }
-  UserModel.push({
+  // if (UserModel.filter(user => user.id == id).length > 0) {
+  //   res.status(statusCode.BAD_REQUEST)
+  //     .send(util.fail(statusCode.BAD_REQUEST, resMessage.ALREADY_ID));
+  //   return;
+  // }
+
+  //4차세미나 DB연결
+  const salt = 'dfw23EFVR3fefnd68FW3r4343'
+
+  /*UserModel.push({
     id,
     name,
     password,
     email
-  });
+  }); */
+
+  const idx = await UserModel.signup(id, name, password, salt, email);
+  if (idx == -1) { //인덱스가 정상적으로 존재하지 않으면 에러
+    return res.status(statusCode.DB_ERROR).send(util.fail(statusCode.DB_ERROR, resMessage.DB_ERROR));
+  }
+
   res.status(statusCode.OK)
     .send(util.success(statusCode.OK, resMessage.CREATED_USER, {
-      userId: id
+      userId: idx
     }));
 });
 
