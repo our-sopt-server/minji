@@ -42,7 +42,7 @@ const user = {
         const query = `SELECT * FROM ${table} where id="${id}"`;
 
         try {
-            const result = await pool.queryParamArr(query);
+            const result = await pool.queryParam(query);
             const now_hashed = crypto.pbkdf2Sync(password, result[0].salt.toString(), 1, 32, 'sha512').toString('hex');
 
             if (result[0].password === now_hashed) { //result[0].password에 hash된 비밀번호 넣어줬었음
@@ -64,7 +64,7 @@ const user = {
         const query = `SELECT * FROM ${table} where id="${id}"`;
 
         try {
-            const result = await pool.queryParamArr(query);
+            const result = await pool.queryParam(query);
 
             return result;
 
