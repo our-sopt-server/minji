@@ -12,10 +12,6 @@ const post = {
             const result = await pool.queryParam(query);
             return result;
         } catch (err) {
-            if (err.errno == 1062) {
-                console.log('postAllRead ERROR : ', err.errno, err.code);
-                return -1;
-            }
             console.log('postAllRead ERROR : ', err);
             throw err;
         }
@@ -28,10 +24,6 @@ const post = {
             const result = await pool.queryParam(query); //query문에 values를 넣어 결과를 받아옴
             return result;
         } catch (err) {
-            if (err.errno == 1062) {
-                console.log('postRead ERROR : ', err.errno, err.code);
-                return -1;
-            }
             console.log('postRead ERROR : ', err);
             throw err;
         }
@@ -69,10 +61,6 @@ const post = {
             await pool.queryParam(query);
 
         } catch (err) {
-            if (err.errno == 1062) {
-                console.log('postUpdate ERROR : ', err.errno, err.code);
-                return -1;
-            }
             console.log('postUpdate ERROR : ', err);
             throw err;
         }
@@ -86,10 +74,6 @@ const post = {
             await pool.queryParamArr(query);
 
         } catch (err) {
-            if (err.errno == 1062) {
-                console.log('postDelete ERROR : ', err.errno, err.code);
-                return -1;
-            }
             console.log('postDelete ERROR : ', err);
             throw err;
         }

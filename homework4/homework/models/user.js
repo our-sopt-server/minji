@@ -52,10 +52,6 @@ const user = {
             }
 
         } catch (err) {
-            if (err.errno == 1062) {
-                console.log('signin ERROR : ', err.errno, err.code);
-                return -1;
-            }
             console.log('signin ERROR : ', err);
             throw err;
         }
@@ -69,10 +65,6 @@ const user = {
             return result;
 
         } catch (err) {
-            if (err.errno == 1062) {
-                console.log('getUser ERROR : ', err.errno, err.code);
-                return -1;
-            }
             console.log('getUser ERROR : ', err);
             throw err;
         }
