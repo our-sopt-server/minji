@@ -130,6 +130,12 @@ router.get('/profile/:id', async (req, res) => {
   // request params 에서 데이터 가져오기
   const id = req.params.id;
 
+  // param data 확인 - 없다면 Null Value 반환
+  if (!id) {
+    res.status(statusCode.BAD_REQUEST).send(util.fail(statusCode.BAD_REQUEST, resMessage.NULL_VALUE));
+    return;
+  }
+
   // id가 같은게 있으면 새로운 배열의 [0]에 넣어서 user에 저장.
   const user = UserModel.filter(user => user.id == id)[0];
 
