@@ -78,7 +78,6 @@ module.exports = {
         // 데이터 받아오기
         //jwt토큰 decoded하고 거기 안에 있는 userIdx 가져옴.
         const userIdx = req.decoded.userIdx;
-        // const profileImg = req.file.path;
         const profileImg = req.file.location;
 
         // data check - undefined
@@ -96,5 +95,53 @@ module.exports = {
         const result = await UserModel.updateProfile(userIdx, profileImg);
         res.status(CODE.OK).send(util.success(CODE.OK, MSG.UPDATE_PROFILE_SUCCESS, result));
 
+    },
+    uploadSelfie: async (req, res) => {
+        // 데이터 받아오기
+        const userIdx = req.decoded.userIdx;
+        const selfies = req.files;
+
+        // data check - undefined
+        if (selfies === undefined || !userIdx) {
+            return res.status(CODE.OK).send(util.fail(CODE.BAD_REQUEST, MSG.NULL_VALUE));
+        }
+
+        // image type check
+        for (var i in selfies) {
+            const type = selfies[i].mimetype.split('/')[1];
+            if (type !== 'jpeg' && type !== 'jpg' && type !== 'png') {
+                return res.status(CODE.OK).send(util.fail(CODE.OK, MSG.UNSUPPORTED_TYPE));
+            }
+        }
+
+        const locations = selfies.map(selfie => selfie.location);
+
+        // call model - database
+        // locations에서 하나의 location 엘리먼트를 가져옴
+        for (location of locations) {
+            await UserModel.uploadSelfie(userIdx, location);
+        }
+
+        res.status(CODE.OK).send(util.success(CODE.OK, MSG.UPLOAD_SELFIES_SUCCESS, {
+            'selfies': locations
+        }));
+    },
+    getAllSelfie: async (req, res) => {
+        const userIdx = req.decoded.userIdx;
+        if (!userIdx) {
+            return res.status(CODE.BAD_REQUEST)
+                .send(util.fail(CODE.BAD_REQUEST, MSG.NULL_VALUE));
+        }
+        const selfies = await UserModel.getAllSelfie(userIdx);
+        if (selfies[0] === undefined) {
+            return res.status(CODE.BAD_REQUEST)
+                .send(util.fail(CODE.BAD_REQUEST, MSG.NO_SELFIES));
+        }
+
+        const result = selfies.map(image => image.selfie);
+
+        res.status(CODE.OK).send(util.success(CODE.OK, MSG.READ_SELFIES_SUCCESS, {
+            'selfies': result
+        }));
     }
 }

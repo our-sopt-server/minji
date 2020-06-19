@@ -25,5 +25,10 @@ module.exports = {
     UNSUPPORTED_TYPE: '지원하지 않는 타입입니다.',
     UPDATE_PROFILE_SUCCESS: '프로필 업데이트 성공',
 
+    // selfie 업로드 
+    UPLOAD_SELFIES_SUCCESS: '셀피 업로드 성공',
+    NO_SELFIES: '셀피가 없습니다.',
+    READ_SELFIES_SUCCESS: '셀피 조회 성공',
+
     DB_ERROR: 'DB 오류'
 };

@@ -57,6 +57,30 @@ const user = {
             console.log('update profile ERROR : ', err);
             throw err;
         }
+    },
+    uploadSelfie: async (userIdx, selfie) => {
+        const fields = 'userIdx, selfie';
+        const questions = `?, ?`;
+        const values = [userIdx, selfie];
+        const query = `INSERT INTO selfie(${fields}) VALUES(${questions})`;
+        try {
+            const result = await pool.queryParamArr(query, values);
+            const insertId = result.insertId;
+            return insertId;
+        } catch (err) {
+            console.log('update selfie ERROR : ', err);
+            throw err;
+        }
+    },
+    getAllSelfie: async (userIdx) => {
+        let query = `SELECT id, name, email, selfie FROM ${table} WHERE userIdx="${userIdx}"`;
+        try {
+            const result = await pool.queryParam(query);
+            return result;
+        } catch (err) {
+            console.log('get all selfie ERROR : ', err);
+            throw err;
+        }
     }
 }
 
